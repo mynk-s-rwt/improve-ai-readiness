@@ -1,0 +1,45 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "AI Readiness Demo App API",
+    "version": "1.0.0",
+    "description": "Read-only API for the public AI readiness demo dashboard."
+  },
+  "servers": [
+    {
+      "url": "https://ai-readiness-demo-app.vercel.app"
+    }
+  ],
+  "paths": {
+    "/api/score": {
+      "get": {
+        "operationId": "getAiReadinessScore",
+        "summary": "Get the cached isitagentready.com scan summary for the demo app.",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audit summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

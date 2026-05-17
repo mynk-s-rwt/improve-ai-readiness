@@ -30,10 +30,16 @@ const ENDPOINTS = [
     purpose: 'Agent-readable site guide (agentsmd.net)',
   },
   {
-    path: '/.well-known/mcp.json',
+    path: '/.well-known/mcp/server-card.json',
     expects: 'json',
     tier: 3,
     purpose: 'MCP server card — tools exposed to model context',
+  },
+  {
+    path: '/.well-known/mcp.json',
+    expects: 'json',
+    tier: 3,
+    purpose: 'Fallback MCP server card path accepted by the audit',
   },
   {
     path: '/.well-known/agent-card.json',
@@ -58,6 +64,18 @@ const ENDPOINTS = [
     expects: 'json',
     tier: 5,
     purpose: 'OAuth Protected Resource Metadata (RFC 9728)',
+  },
+  {
+    path: '/.well-known/oauth-authorization-server',
+    expects: 'json',
+    tier: 5,
+    purpose: 'OAuth Authorization Server Metadata (RFC 8414)',
+  },
+  {
+    path: '/.well-known/http-message-signatures-directory',
+    expects: 'json',
+    tier: 5,
+    purpose: 'Web Bot Auth public key directory',
   },
 ];
 
@@ -175,8 +193,8 @@ export default function Home() {
         <p className="subtitle">AI Agent Coding Hackathon</p>
         <p className="hero-blurb">
           This page is the live test bed for the <code>improve-ai-readiness</code> Claude Skill.
-          Right now it&apos;s a bare Next.js app — every check below should fail. As the skill
-          ships each tier, the boxes flip green.
+          It exposes the same machine-readable files, headers, and well-known endpoints the skill
+          applies to production websites, then reports the live audit result after each deploy.
         </p>
       </header>
 

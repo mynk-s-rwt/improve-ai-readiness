@@ -1,0 +1,10 @@
+{
+  "keys": [
+    {
+      "kty": "OKP",
+      "crv": "Ed25519",
+      "kid": "{{WEB_BOT_AUTH_KEY_ID}}",
+      "x": "{{WEB_BOT_AUTH_PUBLIC_KEY_X}}"
+    }
+  ]
+}

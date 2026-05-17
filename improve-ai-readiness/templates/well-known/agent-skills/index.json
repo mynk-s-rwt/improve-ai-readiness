@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "{{PUBLIC_SKILL_NAME}}",
+      "type": "skill-md",
+      "description": "{{PUBLIC_SKILL_DESCRIPTION}}",
+      "url": "/.well-known/agent-skills/{{PUBLIC_SKILL_NAME}}/SKILL.md",
+      "digest": "sha256:{{PUBLIC_SKILL_SHA256}}"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+# AI Readiness Demo App
+
+> Public test bed for the `improve-ai-readiness` Claude Code Skill.
+
+## Primary URLs
+
+- Home: https://ai-readiness-demo-app.vercel.app/
+- Sitemap: https://ai-readiness-demo-app.vercel.app/sitemap.xml
+- Agent instructions: https://ai-readiness-demo-app.vercel.app/AGENTS.md
+- Agent skills: https://ai-readiness-demo-app.vercel.app/.well-known/agent-skills/index.json
+- API catalog: https://ai-readiness-demo-app.vercel.app/.well-known/api-catalog
+
+## Recommended Reading Order
+
+1. https://ai-readiness-demo-app.vercel.app/
+2. https://ai-readiness-demo-app.vercel.app/AGENTS.md
+3. https://ai-readiness-demo-app.vercel.app/.well-known/agent-skills/site-guide/SKILL.md
+
+## Agent Notes
+
+- This is a public demo site, not a production service.
+- Request `Accept: text/markdown` on `/` for a Markdown representation of the homepage.
+- Respect `robots.txt` and `Content-Signal` preferences.

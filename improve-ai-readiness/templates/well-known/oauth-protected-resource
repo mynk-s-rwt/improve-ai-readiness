@@ -1,0 +1,11 @@
+{
+  "resource": "{{RESOURCE_URL}}",
+  "authorization_servers": [
+    "{{OAUTH_ISSUER_URL}}"
+  ],
+  "scopes_supported": {{OAUTH_SCOPES_JSON}},
+  "bearer_methods_supported": [
+    "header"
+  ],
+  "resource_documentation": "{{API_DOCS_URL}}"
+}

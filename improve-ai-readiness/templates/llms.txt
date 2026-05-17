@@ -1,0 +1,22 @@
+# {{SITE_NAME}}
+
+> {{SITE_DESCRIPTION}}
+
+## Primary URLs
+
+- Home: {{SITE_URL}}/
+- Sitemap: {{SITE_URL}}/sitemap.xml
+- Agent instructions: {{SITE_URL}}/AGENTS.md
+- Agent skills: {{SITE_URL}}/.well-known/agent-skills/index.json
+- API catalog: {{SITE_URL}}/.well-known/api-catalog
+
+## Recommended Reading Order
+
+1. {{SITE_URL}}/
+{{LLMS_RECOMMENDED_LINKS}}
+
+## Agent Notes
+
+- Prefer canonical URLs under {{SITE_URL}}.
+- Request public pages with `Accept: text/markdown` when concise Markdown is preferred.
+- Respect `robots.txt` and `Content-Signal` preferences.

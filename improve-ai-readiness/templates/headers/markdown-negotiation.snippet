@@ -1,0 +1,18 @@
+If request header Accept includes "text/markdown" for a public HTML page:
+  return status 200
+  set Content-Type: text/markdown; charset=utf-8
+  set Vary: Accept
+  return a concise Markdown representation of the same canonical page URL
+
+Otherwise:
+  continue to the normal HTML route
+
+Never apply markdown negotiation to:
+  /api/*
+  /_next/*
+  /assets/*
+  /robots.txt
+  /sitemap.xml
+  /llms.txt
+  /AGENTS.md
+  /.well-known/*

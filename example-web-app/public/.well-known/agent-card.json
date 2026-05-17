@@ -1,0 +1,50 @@
+{
+  "name": "AI Readiness Demo App",
+  "description": "Read-only public agent card for a demo app that reports AI-readiness scan status.",
+  "version": "1.0.0",
+  "protocolVersion": "0.3.0",
+  "url": "https://ai-readiness-demo-app.vercel.app/",
+  "provider": {
+    "organization": "mynk-s-rwt",
+    "url": "https://github.com/mynk-s-rwt/improve-ai-readiness"
+  },
+  "supportedInterfaces": [
+    {
+      "url": "https://ai-readiness-demo-app.vercel.app/api/score",
+      "protocolBinding": "HTTP",
+      "protocolVersion": "1.1"
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "text/markdown"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/plain",
+    "text/markdown"
+  ],
+  "skills": [
+    {
+      "id": "readiness-score",
+      "name": "Read AI readiness score",
+      "description": "Fetch the public readiness score summary from /api/score.",
+      "tags": [
+        "ai-readiness",
+        "audit",
+        "demo"
+      ],
+      "examples": [
+        "Check the current readiness level for the demo app."
+      ]
+    }
+  ],
+  "securitySchemes": {},
+  "security": [],
+  "extensions": []
+}

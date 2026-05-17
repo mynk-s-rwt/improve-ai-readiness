@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "site-guide",
+      "type": "skill-md",
+      "description": "Use when an agent needs to understand, summarize, cite, navigate, or safely test the AI Readiness Demo App.",
+      "url": "/.well-known/agent-skills/site-guide/SKILL.md",
+      "digest": "sha256:e98588eaf0dcf7a2c950f0a395e8adb239e3945bb9f8165b0832b4ba88cc3198"
+    }
+  ]
+}

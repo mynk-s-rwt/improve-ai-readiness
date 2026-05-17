@@ -1,0 +1,17 @@
+{
+  "protocolVersion": "{{MCP_PROTOCOL_VERSION}}",
+  "serverInfo": {
+    "name": "{{MCP_SERVER_NAME}}",
+    "version": "{{MCP_SERVER_VERSION}}"
+  },
+  "transport": {
+    "type": "http",
+    "endpoint": "{{MCP_ENDPOINT_URL}}"
+  },
+  "capabilities": {{MCP_CAPABILITIES_JSON}},
+  "authentication": {
+    "required": {{MCP_AUTH_REQUIRED}},
+    "schemes": {{MCP_AUTH_SCHEMES_JSON}}
+  },
+  "documentation": "{{SITE_URL}}/llms.txt"
+}

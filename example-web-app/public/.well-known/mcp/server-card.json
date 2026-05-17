@@ -1,0 +1,19 @@
+{
+  "protocolVersion": "2025-11-25",
+  "serverInfo": {
+    "name": "ai-readiness-demo-app",
+    "version": "1.0.0"
+  },
+  "transport": {
+    "type": "http",
+    "endpoint": "https://ai-readiness-demo-app.vercel.app/api/score"
+  },
+  "capabilities": {
+    "tools": []
+  },
+  "authentication": {
+    "required": false,
+    "schemes": []
+  },
+  "documentation": "https://ai-readiness-demo-app.vercel.app/llms.txt"
+}

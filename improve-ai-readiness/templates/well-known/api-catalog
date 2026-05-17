@@ -1,0 +1,28 @@
+{
+  "linkset": [
+    {
+      "anchor": "{{SITE_URL}}",
+      "service-desc": [
+        {
+          "href": "{{OPENAPI_URL}}",
+          "type": "application/openapi+json",
+          "title": "{{SITE_NAME}} OpenAPI description"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "{{API_DOCS_URL}}",
+          "type": "text/html",
+          "title": "{{SITE_NAME}} API documentation"
+        }
+      ],
+      "api-catalog": [
+        {
+          "href": "{{SITE_URL}}/.well-known/api-catalog",
+          "type": "application/linkset+json",
+          "title": "{{SITE_NAME}} API catalog"
+        }
+      ]
+    }
+  ]
+}

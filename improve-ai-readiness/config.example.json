@@ -1,0 +1,46 @@
+{
+  "site": {
+    "url": "https://example.com",
+    "name": "Example",
+    "description": "One sentence public description.",
+    "canonicalPages": [
+      "/"
+    ]
+  },
+  "run": {
+    "platform": "ask-or-detect",
+    "targetLevel": "next",
+    "commerceOptIn": false
+  },
+  "contentSignals": {
+    "search": "yes",
+    "aiInput": "yes",
+    "aiTrain": "no"
+  },
+  "features": {
+    "hasPublicApi": false,
+    "hasOpenApi": false,
+    "hasMcpServer": false,
+    "hasA2aAgent": false,
+    "hasOAuth": false,
+    "hasCommerce": false
+  },
+  "mcp": {
+    "protocolVersion": "2025-11-25",
+    "endpoint": "https://example.com/mcp",
+    "authRequired": false
+  },
+  "a2a": {
+    "protocolVersion": "0.3.0",
+    "endpoint": "https://example.com/a2a"
+  },
+  "oauth": {
+    "issuer": "https://example.com",
+    "authorizationEndpoint": "https://example.com/oauth/authorize",
+    "tokenEndpoint": "https://example.com/oauth/token",
+    "jwksUri": "https://example.com/.well-known/jwks.json",
+    "scopes": [
+      "read"
+    ]
+  }
+}

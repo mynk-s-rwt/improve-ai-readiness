@@ -1,0 +1,44 @@
+{
+  "name": "{{AGENT_NAME}}",
+  "description": "{{AGENT_DESCRIPTION}}",
+  "version": "{{AGENT_VERSION}}",
+  "protocolVersion": "{{A2A_PROTOCOL_VERSION}}",
+  "url": "{{A2A_ENDPOINT_URL}}",
+  "provider": {
+    "organization": "{{ORGANIZATION_NAME}}",
+    "url": "{{SITE_URL}}"
+  },
+  "supportedInterfaces": [
+    {
+      "url": "{{A2A_ENDPOINT_URL}}",
+      "protocolBinding": "JSONRPC",
+      "protocolVersion": "{{A2A_PROTOCOL_VERSION}}"
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "text/markdown"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "text/markdown",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "{{AGENT_SKILL_ID}}",
+      "name": "{{AGENT_SKILL_NAME}}",
+      "description": "{{AGENT_SKILL_DESCRIPTION}}",
+      "tags": {{AGENT_SKILL_TAGS_JSON}},
+      "examples": {{AGENT_SKILL_EXAMPLES_JSON}}
+    }
+  ],
+  "securitySchemes": {{A2A_SECURITY_SCHEMES_JSON}},
+  "security": {{A2A_SECURITY_JSON}},
+  "extensions": {{A2A_EXTENSIONS_JSON}}
+}
