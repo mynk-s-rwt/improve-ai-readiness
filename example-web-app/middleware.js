@@ -11,7 +11,7 @@ const linkHeader = [
 
 const homepageMarkdown = `# AI Readiness Demo App
 
-Public test bed for the improve-ai-readiness Claude Code Skill.
+Public test bed for the improve-ai-readiness agent-readiness framework.
 
 ## Live Resources
 

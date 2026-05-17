@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { DEFAULT_DEMO_URL, publicReportUrl } from '../lib/readiness';
 
 const PLATFORM_ROWS = [
   ['Next.js', 'App Router routes, Pages Router middleware, or Vercel headers depending on the artifact.'],
@@ -26,6 +27,32 @@ const SIGNALS = [
   ['Browser tools', 'WebMCP tool registration for in-page actions that a browser agent can discover at runtime.'],
 ];
 
+const IMPACT_DETAILS = [
+  [
+    'Discovery',
+    'Well-known endpoints, Link headers, sitemap entries, and API catalogs give agents deterministic URLs to inspect instead of guessing from page text.',
+  ],
+  [
+    'Interpretation',
+    'Markdown negotiation, JSON-LD, Open Graph, AGENTS.md, and llms.txt reduce extraction noise and preserve the intended page meaning.',
+  ],
+  [
+    'Action',
+    'MCP, Agent Skills, A2A, OpenAPI, and WebMCP explain what actions are available, what inputs they accept, and where agents should call them.',
+  ],
+  [
+    'Governance',
+    'OAuth metadata, protected resource metadata, Content-Signal policy, and Web Bot Auth describe who can access what and under which rules.',
+  ],
+];
+
+const WORKFLOW_STEPS = [
+  ['1. Audit', 'Scan the public URL and read the evidence, not just the headline score.'],
+  ['2. Plan', 'Choose report only, patch after approval, or report then patch.'],
+  ['3. Patch', 'Add the smallest platform-specific surface that can pass the next readiness layer.'],
+  ['4. Verify', 'Deploy, re-scan production, and continue only when the public evidence improves.'],
+];
+
 export default function Details() {
   return (
     <>
@@ -48,10 +75,26 @@ export default function Details() {
           useful public artifact, verifies it on the live URL, and moves on only after the scanner
           sees the change.
         </p>
+        <nav className="hero-actions" aria-label="Field guide links">
+          <a className="button button--primary" href="#impact">
+            See the impact
+          </a>
+          <a className="button" href="#workflow">
+            Workflow
+          </a>
+          <a
+            className="button"
+            href={publicReportUrl(DEFAULT_DEMO_URL)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open public audit
+          </a>
+        </nav>
       </header>
 
       <main className="content content--wide">
-        <section className="card">
+        <section className="card" id="workflow">
           <div className="card-header">
             <h2>What The Framework Does</h2>
             <span className="muted small">audit, patch, deploy, verify</span>
@@ -70,6 +113,21 @@ export default function Details() {
           </div>
         </section>
 
+        <section className="card" id="impact">
+          <div className="card-header">
+            <h2>How The Change Helps Agents</h2>
+            <span className="muted small">find, read, call, govern</span>
+          </div>
+          <div className="research-grid">
+            {IMPACT_DETAILS.map(([title, text]) => (
+              <article className="research-note" key={title}>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="card">
           <div className="card-header">
             <h2>Signals Covered</h2>
@@ -77,6 +135,21 @@ export default function Details() {
           </div>
           <div className="signal-list">
             {SIGNALS.map(([title, text]) => (
+              <article key={title} className="signal-row">
+                <strong>{title}</strong>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="card">
+          <div className="card-header">
+            <h2>Operating Loop</h2>
+            <span className="muted small">report first, patch by approval</span>
+          </div>
+          <div className="signal-list">
+            {WORKFLOW_STEPS.map(([title, text]) => (
               <article key={title} className="signal-row">
                 <strong>{title}</strong>
                 <p>{text}</p>

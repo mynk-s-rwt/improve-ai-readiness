@@ -190,6 +190,14 @@ a:hover {
   font-size: 0.85rem;
 }
 
+.card-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
 .muted {
   color: #8a85a3;
 }
@@ -546,6 +554,10 @@ a:hover {
 .page-hero p {
   max-width: 760px;
   color: #b8b2cc;
+}
+
+.page-hero .hero-actions {
+  justify-content: flex-start;
 }
 
 .back-link {

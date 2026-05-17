@@ -9,6 +9,8 @@
 // The cache lives in module scope, so it persists across warm invocations
 // on the same Vercel serverless container. Cold start = fresh fetch.
 
+import { summarizeScan } from '../../lib/readiness';
+
 const AUDIT_ENDPOINT = 'https://isitagentready.com/api/scan';
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 
@@ -28,54 +30,6 @@ function resolveSiteUrl(req) {
   if (!host) return null;
   if (host.startsWith('http')) return host;
   return `https://${host}`;
-}
-
-function summarize(scan) {
-  // Audit returns `siteError` when the target URL is auth-walled or down.
-  // Surface that as a structured payload so the dashboard can render a
-  // useful message instead of crashing on the missing `level`/`checks`.
-  if (scan.siteError) {
-    return {
-      url: scan.url,
-      scannedAt: scan.scannedAt,
-      blocked: true,
-      siteError: scan.siteError,
-      fullReportUrl: `https://isitagentready.com/report?url=${encodeURIComponent(scan.url)}`,
-    };
-  }
-
-  const rows = [];
-  const counts = { pass: 0, fail: 0, neutral: 0 };
-
-  for (const [category, checks] of Object.entries(scan.checks || {})) {
-    for (const [name, check] of Object.entries(checks)) {
-      const status = check.status || 'neutral';
-      counts[status] = (counts[status] || 0) + 1;
-      rows.push({
-        category,
-        name,
-        status,
-        message: check.message || '',
-      });
-    }
-  }
-
-  return {
-    url: scan.url,
-    scannedAt: scan.scannedAt,
-    level: scan.level,
-    levelName: scan.levelName,
-    counts,
-    rows,
-    nextLevel: scan.nextLevel
-      ? {
-          target: scan.nextLevel.target,
-          name: scan.nextLevel.name,
-          requirementCount: (scan.nextLevel.requirements || []).length,
-        }
-      : null,
-    fullReportUrl: `https://isitagentready.com/report?url=${encodeURIComponent(scan.url)}`,
-  };
 }
 
 export default async function handler(req, res) {
@@ -114,7 +68,7 @@ export default async function handler(req, res) {
     }
 
     const scan = await upstream.json();
-    const payload = summarize(scan);
+    const payload = summarizeScan(scan);
 
     cache = { key: siteUrl, scannedAt: now, payload };
     res.setHeader('x-cache', 'MISS');

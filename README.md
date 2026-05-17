@@ -9,9 +9,11 @@ The work is broader than one scanner. The same files and headers help with SiteD
 - Demo app: [ai-readiness-demo-app.vercel.app](https://ai-readiness-demo-app.vercel.app)
 - AI readiness audit: [isitagentready.com](https://isitagentready.com)
 
-## Use It In Claude Code
+## Use It In Agentic Editors
 
-Install the guide as a Claude Code Skill in the site repo you want to improve:
+The guide is packaged for Claude Code, but the workflow is not limited to one tool. Use it with Claude Code, Codex, Cursor, Windsurf, OpenCode, Aider, Roo Code, Cline, Hermes-style agents, or any coding agent that can read a local folder and follow Markdown instructions.
+
+For Claude Code, install the folder inside the site repo you want to improve:
 
 ```bash
 cd /path/to/your-website
@@ -26,7 +28,15 @@ mkdir -p ~/.claude/skills
 cp -R /path/to/improve-ai-readiness/improve-ai-readiness ~/.claude/skills/improve-ai-readiness
 ```
 
-Then open Claude Code in the target website repo and ask for the next tier:
+For Codex, Cursor, OpenCode, or another coding agent, keep the folder in the repo and point the agent at the entry file:
+
+```text
+Read improve-ai-readiness/SKILL.md and follow it for https://example.com.
+Start with a readiness report. Ask before editing files or hosted settings.
+Target the next failing readiness layer, not every possible protocol at once.
+```
+
+Then open your agent in the target website repo and ask for the next tier:
 
 ```text
 Use improve-ai-readiness on https://example.com.
@@ -36,7 +46,7 @@ Target Level 4 unless the scan shows a smaller nextLevel.
 Do not add commerce protocols unless this site is commerce.
 ```
 
-For a known stack, give Claude Code the platform up front:
+For a known stack, give the agent the platform up front:
 
 ```text
 Use improve-ai-readiness for this Next.js App Router site.
@@ -64,7 +74,7 @@ improve-ai-readiness/scripts/verify-tier.sh https://example.com 3
 ## What Is In This Repository
 
 ```text
-improve-ai-readiness/     Claude Code compatible field guide and templates
+improve-ai-readiness/     Agent-compatible field guide and templates
 example-web-app/          Next.js Pages Router demo deployed on Vercel
 research/                 Local research dossiers used to shape the framework
 results/                  Before and after screenshots for the demo and audit
