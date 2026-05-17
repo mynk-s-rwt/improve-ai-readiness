@@ -1,20 +1,29 @@
-/node_modules
-/.next
-/out
-/build
+# dependencies (any depth)
+node_modules
 
+# Next.js (any depth)
+.next
+out
+build
+
+# system
 .DS_Store
+
+# secrets
 *.pem
 .env*
 !.env.example
 
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# Vercel (any depth)
 .vercel
 
+# editors
 .vscode
 .idea
 
