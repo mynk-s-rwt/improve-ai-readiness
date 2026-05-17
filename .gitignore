@@ -1,0 +1,22 @@
+/node_modules
+/.next
+/out
+/build
+
+.DS_Store
+*.pem
+.env*
+!.env.example
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+.vercel
+
+.vscode
+.idea
+
+# local research/planning notes (uncommitted by default)
+/research
