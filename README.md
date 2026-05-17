@@ -4,10 +4,57 @@ A practical framework for making public websites easier for agents, crawlers, an
 
 The work is broader than one scanner. The same files and headers help with SiteDex-style audits, Cloudflare checks, SEO crawlers, agent directories, browser tool discovery, and future content usage policy checks.
 
-## Live Demo
+## About
 
-- Demo app: https://ai-readiness-demo-app.vercel.app
-- Public audit: https://isitagentready.com
+- Demo app: [ai-readiness-demo-app.vercel.app](https://ai-readiness-demo-app.vercel.app)
+- AI readiness audit: [isitagentready.com](https://isitagentready.com)
+
+## Use It In Claude Code
+
+Install the guide as a Claude Code Skill in the site repo you want to improve:
+
+```bash
+cd /path/to/your-website
+mkdir -p .claude/skills
+cp -R /path/to/improve-ai-readiness/improve-ai-readiness .claude/skills/improve-ai-readiness
+```
+
+Or install it for your user account:
+
+```bash
+mkdir -p ~/.claude/skills
+cp -R /path/to/improve-ai-readiness/improve-ai-readiness ~/.claude/skills/improve-ai-readiness
+```
+
+Then open Claude Code in the target website repo and ask for the next tier:
+
+```text
+Use improve-ai-readiness on https://example.com.
+Detect the platform, run the public audit, and patch only the next level.
+Target Level 4 unless the scan shows a smaller nextLevel.
+Do not add commerce protocols unless this site is commerce.
+```
+
+For a known stack, give Claude Code the platform up front:
+
+```text
+Use improve-ai-readiness for this Next.js App Router site.
+Production URL: https://example.com
+Raise it from the current isitagentready.com level to the next passing level.
+```
+
+The skill starts at `improve-ai-readiness/SKILL.md`, loads `GOTCHAS.md`, detects the platform, audits the public URL, reads the matching level reference, then applies the smallest patch that can pass the next level. After deployment, run the audit again and continue one level at a time.
+
+You can also run the scripts directly from this repo:
+
+```bash
+improve-ai-readiness/scripts/pick-platform.sh /path/to/your-website
+improve-ai-readiness/scripts/audit.sh https://example.com
+improve-ai-readiness/scripts/verify-tier.sh https://example.com 3
+```
+
+## Demo Result
+
 - Final result captured in `results/`: Level 5, 14 pass, 0 fail, 5 neutral
 - Baseline branch: `codex/level-0-demo-app`
 - Final branch: `main`
@@ -98,24 +145,59 @@ Cloudflare's scanner is a useful public scoreboard, but the durable value is the
 
 The research folder tracks Cloudflare, SiteDex, IndexedAI, WordLift, HubSpot, GEO scoreboards, CMS plugins, MCP, A2A, AIPREF, Content Signals, and Web Bot Auth. The guide keeps the high-signal pieces and avoids pretending that every draft protocol belongs on every site.
 
-## Screenshots
+## Proof
 
-The `results/` directory contains the proof set:
+The proof set shows both the demo site and the external audit moving from Level 0 to Level 5.
 
-- `before-demo-app-level-0-home.png`
-- `before-demo-app-level-0-full-page.png`
-- `before-agentready-level-0-overview.png`
-- `before-agentready-level-0-full-page.png`
-- `before-agentready-level-0-checks.png`
-- `after-demo-app-level-5-home.png`
-- `after-demo-app-level-5-full-page.png`
-- `after-demo-app-level-5-details.png`
-- `final-agentready-level-5-overview.png`
-- `final-agentready-level-5-full-page.png`
-- `final-agentready-level-5-checks.png`
+### Before
 
-## Authoring Notes
+<table>
+  <tr>
+    <td width="50%">
+      <img src="results/before-demo-app-level-0-home.png" alt="Baseline demo app at Level 0" />
+    </td>
+    <td width="50%">
+      <img src="results/before-agentready-level-0-overview.png" alt="isitagentready.com audit showing Level 0" />
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Demo app baseline</strong></td>
+    <td><strong>Public audit baseline</strong></td>
+  </tr>
+</table>
 
-- Commits in this repo are authored as `mynk-s-rwt <mynk-s-rwt@users.noreply.github.com>`.
-- The deployed production URL is the stable Vercel project URL, not a per-deploy preview URL. Preview URLs can be protected by Vercel SSO and fail public scans.
-- The guide should stay append-only for gotchas and learnings. New scanner behavior belongs in `GOTCHAS.md` or `learnings.jsonl` so future runs improve.
+### After
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="results/after-demo-app-level-5-home.png" alt="Final demo app showing Level 5" />
+    </td>
+    <td width="50%">
+      <img src="results/final-agentready-level-5-overview.png" alt="isitagentready.com audit showing Level 5 and score 100" />
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Final demo app</strong></td>
+    <td><strong>Public audit result</strong></td>
+  </tr>
+</table>
+
+### Detail Views
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="results/after-demo-app-level-5-details.png" alt="Framework details page in the demo app" />
+    </td>
+    <td width="50%">
+      <img src="results/final-agentready-level-5-checks.png" alt="Detailed passing checks on isitagentready.com" />
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Framework details page</strong></td>
+    <td><strong>Passing checks</strong></td>
+  </tr>
+</table>
+
+Additional full-page captures are available in `results/`.
