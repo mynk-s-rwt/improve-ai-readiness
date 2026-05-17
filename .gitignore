@@ -29,3 +29,6 @@ yarn-error.log*
 
 # local research/planning notes (uncommitted by default)
 /research
+
+# local video drafts (not part of demo app)
+/submission-video
