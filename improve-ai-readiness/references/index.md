@@ -7,6 +7,7 @@ Load references only as needed.
 - `level-rules.md`: live level gates and default stop points.
 - `audit-rubric.md`: all check paths, pass criteria, and fix surfaces.
 - `well-known-paths.md`: canonical paths and content types.
+- `webmcp.md`: browser-side tool registration for `checks.discovery.webMcp`.
 
 ## Load By Target Level
 

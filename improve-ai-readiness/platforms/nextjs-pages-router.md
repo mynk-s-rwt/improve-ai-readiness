@@ -49,7 +49,18 @@ Use root `middleware.js`:
 - Return Markdown for public page paths.
 - Let other requests continue.
 
+## WebMCP
+
+For a Pages Router app, put the browser registration script in `public/webmcp.js` and load it from `pages/_document.js`:
+
+```jsx
+<script src="/webmcp.js" defer />
+```
+
+The script must call `navigator.modelContext.registerTool()` during page load. Use `templates/webmcp.js` as a starting point.
+
 ## Gotchas First
 
 - `pages/api/*` maps under `/api`, not root well-known paths.
 - `public/` static files will not handle `Accept` negotiation by themselves.
+- `provideContext()` examples are stale; use `registerTool()`.

@@ -27,10 +27,12 @@ Move Level 3 to Level 4 by passing at least 1 of:
 - `/.well-known/api-catalog` from `templates/well-known/api-catalog`
 - `/.well-known/mcp.json` from `templates/well-known/mcp.json`
 - `/.well-known/agent-card.json` from `templates/well-known/agent-card.json`
+- WebMCP browser tools from `references/webmcp.md` and `templates/webmcp.js`
 
 ## Verify
 
 ```bash
 curl -i "$SITE_URL/.well-known/agent-skills/index.json"
+curl -i "$SITE_URL/"
 scripts/verify-tier.sh "$SITE_URL" 4
 ```

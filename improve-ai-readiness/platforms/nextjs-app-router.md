@@ -43,6 +43,18 @@ Exclude:
 - `/AGENTS.md`
 - `/.well-known/*`
 
+## WebMCP
+
+Load a client-side registration script from `app/layout.tsx` with `next/script`:
+
+```tsx
+import Script from 'next/script';
+
+<Script src="/webmcp.js" strategy="afterInteractive" />
+```
+
+Put `templates/webmcp.js` at `public/webmcp.js` and tailor the tools to the site.
+
 ## Gotchas First
 
 - `app/robots.ts` cannot emit `Content-Signal`; use a static file or route handler for full robots content.

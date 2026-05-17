@@ -9,6 +9,7 @@ export default function Document() {
       </Head>
       <body>
         <Main />
+        <script src="/webmcp.js" defer />
         <NextScript />
       </body>
     </Html>

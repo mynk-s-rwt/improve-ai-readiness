@@ -47,7 +47,7 @@ Each check has:
 | `checks.discovery.mcpServerCard` | MCP card at accepted well-known path with name/serverInfo | `templates/well-known/mcp.json` |
 | `checks.discovery.a2aAgentCard` | A2A card has `name`, `version`, `supportedInterfaces` | `templates/well-known/agent-card.json` |
 | `checks.discovery.agentSkills` | skills index has non-empty `skills` array | `templates/well-known/agent-skills/index.json` |
-| `checks.discovery.webMcp` | page exposes WebMCP JS tools | optional client integration |
+| `checks.discovery.webMcp` | page exposes WebMCP JS tools on load | `references/webmcp.md` and `templates/webmcp.js` |
 | `checks.discovery.apiCatalog` | `/.well-known/api-catalog` has linkset array | `templates/well-known/api-catalog` |
 | `checks.discovery.oauthDiscovery` | OAuth/OIDC metadata exists with required endpoints | `templates/well-known/oauth-authorization-server` |
 | `checks.discovery.oauthProtectedResource` | protected resource metadata has `resource` and `authorization_servers` | `templates/well-known/oauth-protected-resource` |

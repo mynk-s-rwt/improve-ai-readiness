@@ -40,6 +40,16 @@
 
 **Gotcha: Agent Skills are the safest Level 4 default.** They describe how agents should use an existing site and do not require inventing an MCP or A2A service.
 
+## WebMCP
+
+**Gotcha: `provideContext()` is stale for current WebMCP guidance.** The current W3C draft and the readiness skill require `navigator.modelContext.registerTool()` with `name`, `description`, `inputSchema`, and `execute`; older `provideContext()` snippets may not exist in the audit browser.
+
+**Gotcha: register tools on page load.** The WebMCP check loads the page without clicking. Tools registered behind user interaction, scroll, or delayed routes are invisible.
+
+**Gotcha: native browser support may be behind flags.** If the site must pass the current audit before broad browser support lands, include a small compatibility/testing surface or a maintained polyfill, then still call `registerTool()`.
+
+**Gotcha: duplicate tool names throw.** Client hydration, Fast Refresh, and SPA navigation can rerun registration. Unregister first or catch duplicate-name errors.
+
 ## Level 5
 
 **Gotcha: Level 5 should be honest.** Cloudflare's own audit site has been observed at Level 4 without OAuth metadata. Do not publish fake OAuth metadata unless the user knowingly wants a placeholder.

@@ -117,6 +117,7 @@ function StatusPill({ kind, children }) {
 
 export default function Home() {
   const [score, setScore] = useState({ state: 'loading' });
+  const [webMcp, setWebMcp] = useState({ state: 'checking', tools: [] });
   const [endpoints, setEndpoints] = useState(() =>
     ENDPOINTS.map((e) => ({ ...e, state: 'checking' }))
   );
@@ -137,6 +138,32 @@ export default function Home() {
       });
     return () => {
       cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const timer = window.setTimeout(async () => {
+      try {
+        const testing = navigator.modelContextTesting;
+        if (!testing || typeof testing.listTools !== 'function') {
+          setWebMcp({ state: 'missing', tools: [] });
+          return;
+        }
+        const tools = await testing.listTools();
+        if (cancelled) return;
+        setWebMcp({
+          state: tools && tools.length ? 'live' : 'missing',
+          tools: tools || [],
+        });
+      } catch (err) {
+        if (cancelled) return;
+        setWebMcp({ state: 'error', error: err.message, tools: [] });
+      }
+    }, 250);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
     };
   }, []);
 
@@ -270,6 +297,30 @@ export default function Home() {
                 )}
               </p>
             </>
+          )}
+        </section>
+
+        <section className="card">
+          <div className="card-header">
+            <h2>WebMCP Browser Tools</h2>
+            {webMcp.state === 'checking' && <StatusPill kind="checking">checking…</StatusPill>}
+            {webMcp.state === 'live' && <StatusPill kind="live">{webMcp.tools.length} tools live</StatusPill>}
+            {webMcp.state === 'missing' && <StatusPill kind="missing">missing</StatusPill>}
+            {webMcp.state === 'error' && <StatusPill kind="warn">error</StatusPill>}
+          </div>
+          {webMcp.state === 'live' ? (
+            <ul className="tool-list">
+              {webMcp.tools.map((tool) => (
+                <li key={tool.name}>
+                  <code>{tool.name}</code>
+                  <span className="muted small">{tool.description}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="muted small">
+              Tools are registered on page load through <code>navigator.modelContext.registerTool()</code>.
+            </p>
           )}
         </section>
 
