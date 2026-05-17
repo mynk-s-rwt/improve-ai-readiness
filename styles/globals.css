@@ -23,10 +23,23 @@ body {
   background: radial-gradient(ellipse at center top, #1a0b25 0%, #0a0610 60%);
 }
 
+.hero-copy {
+  max-width: 900px;
+}
+
 .hero-mascot {
   font-size: 6rem;
   margin-bottom: 1.5rem;
   filter: drop-shadow(0 0 28px rgba(232, 70, 58, 0.35));
+}
+
+.eyebrow {
+  margin-bottom: 1rem;
+  color: #e8463a;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
 .title {
@@ -50,4 +63,86 @@ body {
   color: #8a85a3;
   text-transform: uppercase;
   font-weight: 500;
+}
+
+.lede {
+  max-width: 720px;
+  margin: 1.5rem auto 0;
+  color: #c8c1d8;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.65;
+}
+
+.baseline-panel {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) 1.25fr;
+  gap: 2rem;
+  width: min(880px, 100%);
+  margin-top: 4rem;
+  padding: 2rem;
+  border: 1px solid rgba(232, 70, 58, 0.22);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+  text-align: left;
+}
+
+.panel-kicker {
+  color: #8a85a3;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.level-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.level-number {
+  color: #ff6b5d;
+  font-family: 'Impact', 'Arial Black', system-ui, sans-serif;
+  font-size: clamp(4rem, 8vw, 6.5rem);
+  font-style: italic;
+  line-height: 0.85;
+}
+
+.level-label {
+  color: #e6e0f0;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.missing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.missing-chip {
+  display: block;
+  min-height: 44px;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(138, 133, 163, 0.24);
+  border-radius: 8px;
+  background: rgba(10, 6, 16, 0.72);
+  color: #c8c1d8;
+  font-weight: 750;
+}
+
+@media (max-width: 760px) {
+  .baseline-panel {
+    grid-template-columns: 1fr;
+    margin-top: 2.5rem;
+    padding: 1.25rem;
+  }
+
+  .missing-grid {
+    grid-template-columns: 1fr;
+  }
 }
