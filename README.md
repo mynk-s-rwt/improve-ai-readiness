@@ -30,7 +30,8 @@ Then open Claude Code in the target website repo and ask for the next tier:
 
 ```text
 Use improve-ai-readiness on https://example.com.
-Detect the platform, run the public audit, and patch only the next level.
+Detect the platform, run the public audit, and first generate a readiness report.
+After the report, ask before patching only the next level.
 Target Level 4 unless the scan shows a smaller nextLevel.
 Do not add commerce protocols unless this site is commerce.
 ```
@@ -40,10 +41,11 @@ For a known stack, give Claude Code the platform up front:
 ```text
 Use improve-ai-readiness for this Next.js App Router site.
 Production URL: https://example.com
-Raise it from the current isitagentready.com level to the next passing level.
+Generate a readiness report, then ask before raising it from the current
+isitagentready.com level to the next passing level.
 ```
 
-The skill starts at `improve-ai-readiness/SKILL.md`, loads `GOTCHAS.md`, detects the platform, audits the public URL, reads the matching level reference, then applies the smallest patch that can pass the next level. After deployment, run the audit again and continue one level at a time.
+The entry point is `improve-ai-readiness/SKILL.md`. It loads `GOTCHAS.md`, detects the platform, audits the public URL, reads the matching level reference, then either writes a report or asks before applying the smallest patch that can pass the next level. After deployment, run the audit again and continue one level at a time.
 
 You can also run the scripts directly from this repo:
 

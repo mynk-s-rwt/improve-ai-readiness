@@ -11,6 +11,7 @@
     "platform": "ask-or-detect",
     "host": "ask-or-detect",
     "mode": "survey-plan-approve-patch",
+    "deliveryMode": "ask-report-only-or-patch",
     "repoScope": "code-and-host-guidance",
     "targetOutcome": "universal-baseline-and-next-scorecard-level",
     "targetLevel": "next",

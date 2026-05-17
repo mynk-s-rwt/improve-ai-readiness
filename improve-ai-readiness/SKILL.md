@@ -29,21 +29,23 @@ Start in survey mode. Do not edit files until the user approves a plan, unless t
 
 1. Read `GOTCHAS.md`, then `references/index.md`.
 2. Detect the local platform with `scripts/pick-platform.sh .` when a repo is available.
-3. Ask for missing setup values with `AskUserQuestion` when available. Otherwise ask concise numbered questions.
+3. Ask for missing setup values and delivery mode with `AskUserQuestion` when available. Otherwise ask concise numbered questions.
 4. Run available audits against the public production URL. Use `scripts/audit.sh "$SITE_URL"` for the Cloudflare scorecard, then do local checks for universal readiness.
-5. Present a short plan before edits:
+5. If the user chose report mode, write the report and stop unless the user asks to continue.
+6. Present a short plan before edits:
    - current evidence
    - recommended track
    - files or hosted settings to change
    - risks and placeholders
    - exact approval question: `Proceed with this patch?`
-6. After approval, patch only the agreed scope. Re-audit after deploy.
+7. After approval, patch only the agreed scope. Re-audit after deploy.
 
 ## Required Questions
 
 Gather these values before planning:
 
 - public production URL
+- delivery mode: readiness report, approved patch run, or report then patch
 - target outcome: universal baseline, specific scanner score, or `isitagentready.com` level
 - repo scope: local code changes, hosted-platform instructions, or both
 - platform and host: detect when possible, confirm if uncertain
@@ -54,8 +56,14 @@ Gather these values before planning:
 When `AskUserQuestion` is available, ask no more than three structured questions at once:
 
 - outcome: `Universal baseline`, `Next scorecard level`, `Specific target`
-- scope: `Code patch`, `Hosted guidance`, `Both`
+- delivery: `Report only`, `Patch after approval`, `Report then patch`
 - capability profile: `Content site`, `App/API`, `Commerce`
+
+## Delivery Modes
+
+- Report only: audit the production URL and local repo, then return prioritized findings, estimated effort, platform notes, and exact next actions. Do not edit files.
+- Patch after approval: audit, propose the patch plan, ask `Proceed with this patch?`, then edit only the approved files or produce hosted-platform instructions.
+- Report then patch: produce the report first, ask which recommendations to apply, then follow patch-after-approval.
 
 ## Tracks
 

@@ -99,14 +99,32 @@ const STACK_LAYERS = [
     name: 'Native controls',
     status: 'Level 5',
     text: 'OAuth metadata, Web Bot Auth, and browser WebMCP move the site from static discovery into governed interaction.',
-    tip: 'Do not fake commerce or payment protocols on non-commerce sites. The checker treats them as neutral.',
+    tip: 'Do not add commerce or payment protocols on non-commerce sites. The checker treats them as neutral.',
   },
 ];
 
 const JOURNEY = [
-  ['Before', 'Level 0', 'No robots, sitemap, markdown, or well-known discovery surface.'],
-  ['After', 'Level 5', 'Fourteen passing checks with commerce left neutral for a non-commerce demo.'],
-  ['Pattern', 'Portable', 'Same sequence maps to Next.js, Astro, SvelteKit, Remix, Vercel, Netlify, Cloudflare, and static sites.'],
+  ['Before', '0', 'The public audit found no readiness surface: no robots, sitemap, markdown, or well-known discovery.'],
+  ['After', '100', 'The same deployed app now reaches Level 5 with fourteen passing checks and commerce left neutral.'],
+  ['Repeat', 'Your site', 'Use the framework to get a report, approve a patch plan, deploy, and re-scan.'],
+];
+
+const CTA_STEPS = [
+  {
+    number: '01',
+    title: 'Install the framework',
+    text: 'Copy the improve-ai-readiness folder into your Claude Code skills directory or use this repo as the reference source.',
+  },
+  {
+    number: '02',
+    title: 'Ask for report or patch',
+    text: 'Choose a readiness report, an approved patch run, or both. The skill asks before changing files or hosted settings.',
+  },
+  {
+    number: '03',
+    title: 'Deploy and verify',
+    text: 'Ship the next tier, scan the production URL, then keep going until the evidence improves.',
+  },
 ];
 
 function matchesExpectedType(contentType, expects) {
@@ -243,40 +261,55 @@ export default function Home() {
         <title>Ralphthon@SG | AI Readiness Demo</title>
         <meta
           name="description"
-          content="Live test bed showing how a public website moves from Level 0 to Level 5 on agent readiness checks."
+          content="Demo app showing how the improve-ai-readiness framework moved a public website from 0 to 100 on agent readiness checks."
         />
       </Head>
 
       <header className="hero">
         <div className="hero-mascot" aria-hidden="true">🦞</div>
+        <p className="hero-kicker">Demo app powered by improve-ai-readiness</p>
         <h1 className="title">
           RALPHTHON<span className="title-accent">@SG</span>
         </h1>
         <p className="subtitle">AI Agent Coding Hackathon</p>
         <p className="hero-blurb">
-          A public test bed for the <code>improve-ai-readiness</code> framework. It exposes
-          crawl rules, markdown negotiation, agent directories, OAuth metadata, and browser
-          WebMCP tools, then reports the live audit result after each deploy.
+          This is the proof app. It started at <strong>0</strong> on the public AI readiness
+          audit. Using the <code>improve-ai-readiness</code> skill framework, it now scores{' '}
+          <strong>100</strong> and exposes crawl rules, markdown negotiation, agent discovery,
+          OAuth metadata, and browser WebMCP tools.
         </p>
         <nav className="hero-actions" aria-label="Demo links">
           <a className="button button--primary" href="#live-score">
-            Live score
-          </a>
-          <a className="button" href="/details">
-            Framework details
+            See the score
           </a>
           <a
-            className="button"
+            className="button button--primary-alt"
             href="https://github.com/mynk-s-rwt/improve-ai-readiness"
             target="_blank"
             rel="noreferrer"
           >
-            Source
+            Use it on your site
+          </a>
+          <a className="button" href="/details">
+            Framework details
           </a>
         </nav>
       </header>
 
       <main className="content">
+        <section className="card intro-card">
+          <div>
+            <span className="eyebrow">What you are looking at</span>
+            <h2>One Next.js demo app, taken from 0 to 100.</h2>
+          </div>
+          <p className="muted">
+            The framework did not just add a badge. It added the public files, headers,
+            well-known endpoints, browser tools, and verification loop that agents and scanners
+            can actually inspect. The same pattern works as a report-only audit or as an approved
+            code patch for your own website.
+          </p>
+        </section>
+
         <section className="card card--accent" id="live-score">
           <div className="card-header">
             <h2>Live AI-Readiness Score</h2>
@@ -348,6 +381,35 @@ export default function Home() {
               </p>
             </>
           )}
+        </section>
+
+        <section className="card cta-card">
+          <div className="card-header">
+            <h2>Make Your Website Agent-Ready</h2>
+            <a
+              className="card-link"
+              href="https://github.com/mynk-s-rwt/improve-ai-readiness"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open the framework
+            </a>
+          </div>
+          <div className="cta-steps">
+            {CTA_STEPS.map((step) => (
+              <article className="cta-step" key={step.number}>
+                <span>{step.number}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </article>
+            ))}
+          </div>
+          <div className="prompt-strip">
+            <code>
+              Use improve-ai-readiness on https://your-site.com. First generate a readiness
+              report, then ask before applying fixes.
+            </code>
+          </div>
         </section>
 
         <section className="journey-grid" aria-label="Before and after summary">
@@ -468,8 +530,8 @@ export default function Home() {
             </div>
             <p className="muted">
               The framework audits first, ships only the next tier of files, waits for deployment,
-              and scans again. That keeps a plain site from receiving OAuth, A2A, MCP, and commerce
-              artifacts before they are needed.
+              and scans again. It can stop at a report, or it can apply a patch after the user
+              approves the plan.
             </p>
           </article>
         </section>
