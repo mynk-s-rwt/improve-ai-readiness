@@ -1,6 +1,8 @@
-# Audit Rubric
+# isitagentready Scorecard
 
-Use the live scan response as the final contract:
+Use this reference only when the user asks for the Cloudflare `isitagentready.com` scorecard, or when using that scorecard as one verification layer. It is not the full definition of generic agent readiness.
+
+Use the live scan response as the scorecard contract:
 
 ```http
 POST https://isitagentready.com/api/scan

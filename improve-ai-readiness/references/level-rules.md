@@ -1,6 +1,6 @@
-# Level Rules
+# isitagentready Level Rules
 
-These rules mirror the live `isitagentready.com` API behavior observed on 2026-05-17.
+These rules mirror the live `isitagentready.com` API behavior observed on 2026-05-17. Use them for the Cloudflare scorecard track, not as the whole generic readiness model.
 
 | Level | Live name | Requirement |
 |---:|---|---|

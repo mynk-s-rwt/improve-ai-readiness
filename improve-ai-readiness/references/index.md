@@ -4,8 +4,10 @@ Load references only as needed.
 
 ## Always Useful
 
+- `universal-readiness.md`: scanner-neutral crawl, SEO, structured data, policy, and discovery layers.
+- `host-actions.md`: Cloudflare, Vercel, Netlify, WordPress, Webflow, Wix, Shopify dashboard guidance.
 - `level-rules.md`: live level gates and default stop points.
-- `audit-rubric.md`: all check paths, pass criteria, and fix surfaces.
+- `audit-rubric.md`: `isitagentready.com` check paths, pass criteria, and fix surfaces.
 - `well-known-paths.md`: canonical paths and content types.
 - `webmcp.md`: browser-side tool registration for `checks.discovery.webMcp`.
 
@@ -23,9 +25,10 @@ Load references only as needed.
 
 ## Source Priority
 
-1. Fresh `scripts/audit.sh` output.
-2. `nextLevel.requirements[]` from the scan.
-3. These references.
-4. Templates.
+1. User constraints and approval.
+2. Public production HTTP evidence.
+3. Fresh scanner output, including `scripts/audit.sh` when relevant.
+4. These references and platform files.
+5. Templates.
 
 If the auditor evidence differs from this documentation, follow the auditor and append the learning to `../learnings.jsonl`.

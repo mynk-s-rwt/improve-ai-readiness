@@ -9,13 +9,30 @@
   },
   "run": {
     "platform": "ask-or-detect",
+    "host": "ask-or-detect",
+    "mode": "survey-plan-approve-patch",
+    "repoScope": "code-and-host-guidance",
+    "targetOutcome": "universal-baseline-and-next-scorecard-level",
     "targetLevel": "next",
-    "commerceOptIn": false
+    "commerceOptIn": false,
+    "requireApprovalBeforeEdits": true
+  },
+  "scannerTargets": {
+    "isitagentready": true,
+    "genericReadiness": true,
+    "siteDexStyle": false,
+    "indexedAiStyle": false
   },
   "contentSignals": {
     "search": "yes",
     "aiInput": "yes",
     "aiTrain": "no"
+  },
+  "metadata": {
+    "canonicalBaseUrl": "https://example.com",
+    "ogImage": "https://example.com/og.png",
+    "organizationName": "Example",
+    "sameAs": []
   },
   "features": {
     "hasPublicApi": false,

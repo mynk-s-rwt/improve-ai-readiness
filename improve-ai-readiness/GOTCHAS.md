@@ -1,5 +1,13 @@
 # Gotchas
 
+## Scope
+
+**Gotcha: one scanner is not the whole job.** `isitagentready.com` is useful because it gives public evidence, but generic readiness also includes canonical URLs, metadata, JSON-LD, security contact paths, feed discovery, content quality, and host settings that the scorecard may not grade.
+
+**Gotcha: ask before edits.** This skill should survey, propose a plan, and ask for approval before changing repo files or hosted platform settings unless the user already approved that exact patch.
+
+**Gotcha: hosted CMS work may not be patchable from Git.** WordPress, Webflow, Framer, Wix, and Shopify often need dashboard/plugin/theme actions. Provide exact steps when the repo does not control the live response.
+
 ## Scoring
 
 **Gotcha: there is no numeric score in the scan API.** The public UI may show score-like numbers, but `/api/scan` returns `level`, `levelName`, checks, and `nextLevel`. Optimize the required checks for the next level, not a guessed point total.
@@ -19,6 +27,8 @@
 ## Baseline Files
 
 **Gotcha: one small robots file can unlock multiple checks.** `User-agent: *`, `Allow: /`, `Content-Signal: ...`, and `Sitemap: ...` usually pass robots, AI bot rules, content signals, and sitemap discovery.
+
+**Gotcha: `llms.txt` is cheap, not sufficient.** Research shows weak adoption and no clear citation lift. Add it when easy, but prioritize sitemap freshness, canonical URLs, JSON-LD, OG metadata, and Markdown access.
 
 **Gotcha: `Content-Signal` may trigger warnings in unrelated validators.** The readiness audit expects it in `robots.txt`; older SEO tools may call it unknown.
 
@@ -52,7 +62,7 @@
 
 ## Level 5
 
-**Gotcha: Level 5 should be honest.** Cloudflare's own audit site has been observed at Level 4 without OAuth metadata. Do not publish fake OAuth metadata unless the user knowingly wants a placeholder.
+**Gotcha: Level 5 should be honest.** Cloudflare's own audit site has been observed at Level 4 without OAuth metadata. Do not publish placeholder OAuth metadata unless the user knowingly wants scaffolding.
 
 **Gotcha: Web Bot Auth is more than a JSON file in production.** The audit may only inspect the JWKS directory, but real Web Bot Auth requires signed messages and private key handling outside static templates.
 

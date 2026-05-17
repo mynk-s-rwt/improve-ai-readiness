@@ -1,64 +1,73 @@
 ---
 name: improve-ai-readiness
-description: raise AI readiness, agent-ready website, isitagentready score, improve isitagentready.com level, add robots.txt sitemap.xml Link headers, markdown negotiation, Content-Signal, llms.txt, AGENTS.md, well-known MCP A2A agent-skills api-catalog OAuth metadata, make Next.js Astro SvelteKit Remix Cloudflare Vercel Netlify static site agent-native
+description: agent-ready website, AI readiness audit, LLM SEO, answer engine optimization, improve crawlability, add robots.txt sitemap canonical OG JSON-LD AGENTS.md llms.txt Content-Signal Content-Usage markdown negotiation OpenAPI MCP A2A agent-skills WebMCP OAuth Web Bot Auth, improve isitagentready SiteDex IndexedAI Cloudflare Vercel Netlify WordPress Webflow Shopify static site readiness
 ---
 
 # improve-ai-readiness
 
-Use this runbook to raise a public website through the `isitagentready.com` levels. Ship one level at a time, verify the deployed URL, then continue.
+Use this runbook to improve a public website's agent-readiness surface across scanners, crawlers, answer engines, and browser agents. Treat `isitagentready.com` as one useful public scorecard, not the whole goal.
 
 ## When To Use This Skill
 
 Use when the user asks to:
 
-- improve an `isitagentready.com` level or score
-- make a website agent-ready, AI-readable, AI-discoverable, or agent-native
-- add `robots.txt`, `sitemap.xml`, `Content-Signal`, Markdown negotiation, Agent Skills, MCP, A2A, API catalog, OAuth metadata, or Web Bot Auth
-- adapt those artifacts across Next.js, Astro, SvelteKit, Remix, React Router, Cloudflare, Vercel, Netlify, or static HTML
+- make a website agent-ready, AI-readable, AI-discoverable, answer-engine friendly, or LLM-crawlable
+- improve `isitagentready.com`, SiteDex-style, IndexedAI-style, SEO, GEO, or structured-data readiness
+- add crawl, policy, markdown, schema, OpenAPI, MCP, A2A, Agent Skills, WebMCP, OAuth, or Web Bot Auth artifacts
+- adapt those artifacts across Next.js, Astro, SvelteKit, Remix, React Router, Cloudflare, Vercel, Netlify, WordPress, Webflow, Shopify, or static HTML
 
 ## Not For
 
-- Do not chase commerce protocols unless commerce is explicitly in scope.
-- Do not publish fake OAuth, MCP, A2A, or payment endpoints without calling out that they are placeholders.
-- Do not optimize against preview URLs when the production URL is available.
+- Do not chase x402, MPP, UCP, ACP, or AP2 unless commerce is explicitly in scope.
+- Do not publish placeholder OAuth, MCP, A2A, payment, or bot-signing endpoints without labeling them as placeholders and getting approval.
+- Do not make hosted-dashboard changes without explicit user permission and credentials.
+- Do not optimize preview URLs when a stable production URL exists.
 
-## Load First
+## Default Interaction Flow
 
-1. Read `GOTCHAS.md`.
-2. Read `references/index.md`.
-3. Run `scripts/pick-platform.sh` from the target repo root unless the platform is already known.
-4. Run `scripts/audit.sh "$SITE_URL"` and let `nextLevel` drive the next patch.
+Start in survey mode. Do not edit files until the user approves a plan, unless the user has already given explicit approval for this exact patch.
 
-Ask the user for missing values with `AskUserQuestion` when available:
+1. Read `GOTCHAS.md`, then `references/index.md`.
+2. Detect the local platform with `scripts/pick-platform.sh .` when a repo is available.
+3. Ask for missing setup values with `AskUserQuestion` when available. Otherwise ask concise numbered questions.
+4. Run available audits against the public production URL. Use `scripts/audit.sh "$SITE_URL"` for the Cloudflare scorecard, then do local checks for universal readiness.
+5. Present a short plan before edits:
+   - current evidence
+   - recommended track
+   - files or hosted settings to change
+   - risks and placeholders
+   - exact approval question: `Proceed with this patch?`
+6. After approval, patch only the agreed scope. Re-audit after deploy.
+
+## Required Questions
+
+Gather these values before planning:
 
 - public production URL
-- platform/framework
-- target level, default `nextLevel.target`
-- content-signal policy: `search`, `ai-input`, `ai-train`
-- whether the site has real APIs, an MCP endpoint, an A2A agent, OAuth, or commerce
+- target outcome: universal baseline, specific scanner score, or `isitagentready.com` level
+- repo scope: local code changes, hosted-platform instructions, or both
+- platform and host: detect when possible, confirm if uncertain
+- site type: docs, marketing, SaaS app, API, agent service, marketplace, commerce, publisher
+- real capabilities: public API, OpenAPI, MCP, A2A, OAuth, account login, protected resources, commerce
+- content policy: `search`, `ai-input`, `ai-train`, and any legal or brand constraints
 
-## Level Flow
+When `AskUserQuestion` is available, ask no more than three structured questions at once:
 
-Load only the current target level file:
+- outcome: `Universal baseline`, `Next scorecard level`, `Specific target`
+- scope: `Code patch`, `Hosted guidance`, `Both`
+- capability profile: `Content site`, `App/API`, `Commerce`
 
-- Level 1: `references/tier-1-basic-web.md`
-- Level 2: `references/tier-2-bot-aware.md`
-- Level 3: `references/tier-3-agent-readable.md`
-- Level 4: `references/tier-4-agent-integrated.md`
-- Level 5: `references/tier-5-agent-native.md`
+## Tracks
 
-Then load exactly one platform file from `platforms/`, plus a deployment overlay if needed:
+Load only the references needed for the chosen track.
 
-- `platforms/nextjs-app-router.md`
-- `platforms/nextjs-pages-router.md`
-- `platforms/astro.md`
-- `platforms/sveltekit.md`
-- `platforms/remix-react-router.md`
-- `platforms/cloudflare-pages.md`
-- `platforms/cloudflare-workers.md`
-- `platforms/vercel.md`
-- `platforms/netlify.md`
-- `platforms/plain-html.md`
+| Track | When | Load |
+|---|---|---|
+| Universal baseline | any public site | `references/universal-readiness.md` |
+| Cloudflare scorecard | user asks for `isitagentready.com` or Level 0-5 | `references/level-rules.md`, then one tier file |
+| Hosted platform | user needs Cloudflare, Vercel, Netlify, WordPress, Webflow, Shopify guidance | `references/host-actions.md` plus one platform file |
+| Browser tools | user needs WebMCP or page-level tools | `references/webmcp.md` |
+| Commerce | real commerce or explicit opt-in | `references/commerce-track.md` |
 
 ## Quick Reference
 
@@ -78,47 +87,49 @@ improve-ai-readiness/scripts/hash-file.sh public/.well-known/agent-skills/site-g
 
 ## Defaults
 
+- Generic site: start with universal baseline, then use scorecard tiers as verification.
+- Code repo available: prefer direct patching of files, headers, routes, metadata, and structured data.
+- No repo or hosted CMS: provide exact dashboard steps and snippets; do not pretend to have changed the site.
 - Non-commerce sites: ignore x402, MPP, UCP, ACP, and AP2 unless the user opts in.
-- Generic sites: default Level 4 integration to Agent Skills, because it does not require a fake protocol endpoint.
+- Generic scorecard Level 4: default to Agent Skills, because it does not require an invented protocol endpoint.
 - Protected APIs: only publish OAuth metadata when real authorization/resource endpoints exist or the user explicitly asks for scaffolding.
-- Static hosts: use edge/functions/middleware for markdown negotiation; a `.md` alternate file is not enough.
+- Static hosts: use edge, functions, middleware, or host rules for markdown negotiation; a `.md` alternate file is not enough.
 
 ## Verification Loop
 
-1. Apply the smallest patch that can pass the next level.
+1. Apply the smallest approved patch that can pass the next goal.
 2. Verify the local routes if the framework supports local dev.
-3. After deploy, run `scripts/verify-tier.sh "$SITE_URL" "$TARGET_LEVEL"`.
-4. Append one JSON line to `learnings.jsonl` with platform, level, failing checks, fix, and verification result.
-5. Continue only after the deployed score moves.
+3. After deploy, re-run the relevant scanner and direct `curl -i` checks.
+4. Append one JSON line to `learnings.jsonl` with platform, goal, failing checks, fix, and verification result.
+5. Continue only after deployed evidence improves or the user chooses a different track.
 
 ## Source Priority
 
 Use this order when sources disagree:
 
-1. Live `/api/scan` evidence from `isitagentready.com`.
-2. `references/level-rules.md` and `references/audit-rubric.md`.
-3. Platform docs and project conventions.
-4. Templates in this skill.
+1. The user's explicit product, legal, and deployment constraints.
+2. Live HTTP evidence from the public production URL.
+3. Scanner evidence, including `isitagentready.com` when in scorecard mode.
+4. Platform documentation and project conventions.
+5. Templates in this skill.
 
 ## Examples
 
-### Example 1: New Next.js Marketing Site
+### Example 1: Next.js Marketing Site
 
-- Input: production URL, Next.js Pages Router, Level 0.
-- Load: `tier-1-basic-web.md`, then `platforms/nextjs-pages-router.md`.
-- Output: `public/robots.txt`, `public/sitemap.xml`, homepage `Link` header in `next.config.js`.
-- Acceptance: `verify-tier.sh "$SITE_URL" 1` exits 0 after deploy.
+- Survey: production URL, Pages Router, Vercel, no API, non-commerce.
+- Plan: robots, sitemap, canonical, OG, JSON-LD, `AGENTS.md`, `llms.txt`, Link header.
+- Ask: `Proceed with this patch?`
+- Verify: local build, `curl -i`, then `audit.sh`.
 
-### Example 2: Static Site At Level 2
+### Example 2: Cloudflare Pages Static Site
 
-- Input: Cloudflare Pages static site with robots and content signals already passing.
-- Load: `tier-3-agent-readable.md`, then `platforms/cloudflare-pages.md`.
-- Output: Pages Function or Worker middleware for `Accept: text/markdown`; optional `/llms.txt` and `/AGENTS.md`.
-- Acceptance: `curl -H "Accept: text/markdown" "$SITE_URL/"` returns `Content-Type: text/markdown`.
+- Survey: static output, Cloudflare Pages, user wants scorecard Level 3.
+- Plan: `_headers`, `robots.txt`, sitemap, Pages Function for `Accept: text/markdown`.
+- Hosted ask: confirm whether Cloudflare dashboard toggles such as AI Crawl Control or Web Bot Auth are in scope.
 
-### Example 3: Generic Site Reaching Level 4
+### Example 3: WordPress Or Webflow Site
 
-- Input: no API, no MCP, no A2A, non-commerce.
-- Load: `tier-4-agent-integrated.md`.
-- Output: `/.well-known/agent-skills/index.json` and one public site-guide `SKILL.md`.
-- Acceptance: `checks.discovery.agentSkills.status == "pass"`.
+- Survey: no repo write access, hosted CMS.
+- Plan: dashboard/plugin steps for sitemap, robots, schema, OG, custom code embeds, and redirects.
+- Output: instructions and copy-paste snippets, not local commits that cannot affect production.
