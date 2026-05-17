@@ -1,6 +1,8 @@
+<div align="center">
+
 # AI Readiness Field Guide
 
-Ralphthon@SG hackathon submission for turning a normal public website into an agent-ready website with measurable evidence.
+Framework for turning a normal public website into an agent-ready website with measurable evidence.
 
 The demo starts as a Level 0 deployment and ends at Level 5 with a public score of 100 on the AI-readiness audit. The framework is not tied to one scanner or one hosting provider. It gives web apps a structured contract that agents, crawlers, directories, and audit tools can read.
 
@@ -8,13 +10,13 @@ The demo starts as a Level 0 deployment and ends at Level 5 with a public score 
 
 [![AI Readiness demo video preview](results/ai-ready-demo-preview.gif)](https://youtu.be/pUUvW0KFlYA)
 
-## Hackathon Result
+</div>
 
-| Before | After |
-| --- | --- |
-| Level 0, no agent-readiness surface | Level 5, Agent-Native |
-| 0 passing checks | 14 passing checks |
-| Agents infer from rendered HTML | Agents read files, cards, tools, and metadata |
+## What It Achieves
+
+On the demo app, the framework moved a public site from Level 0 to Level 5 and from 0 passing readiness checks to 14 passing checks.
+
+For another website, the goal is the same: give agents a reliable contract for discovering the site, reading its content, understanding its policies, and finding the tools or APIs it exposes.
 
 The reusable framework adds the files and endpoints agents look for: `robots.txt` with AI-bot rules, `sitemap.xml`, `llms.txt`, `AGENTS.md`, `/.well-known/mcp.json`, A2A metadata, an agent-skills index, WebMCP, OAuth metadata, and an API catalog. After every change, it re-runs the audit so the score movement is visible.
 
@@ -22,7 +24,7 @@ The reusable framework adds the files and endpoints agents look for: `robots.txt
 
 This project was built through the Codex app with very little manual implementation work. The human role was setting the goal, reviewing the output, giving product and design feedback, and publishing the final video.
 
-Codex handled the planning loop, repository audit, framework authoring, platform-specific fixes, Next.js demo implementation, screenshots, Remotion video project, motion design, local rendering, and documentation updates. This submission is meant to show Codex as more than a coding helper: it can drive a complete product loop from problem framing to shipped code, evidence capture, demo production, and documentation while keeping a human in review.
+Codex handled the planning loop, repository audit, framework authoring, platform-specific fixes, Next.js demo implementation, screenshots, Remotion video project, motion design, local rendering, and documentation updates. This project shows Codex as more than a coding helper: it can drive a complete product loop from problem framing to shipped code, evidence capture, demo production, and documentation while keeping a human in review.
 
 ## What This Is
 
