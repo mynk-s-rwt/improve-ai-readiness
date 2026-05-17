@@ -1,9 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-// Well-known endpoints that AI agents look for. Each row is live-checked
-// against this same origin on page load — green when present with the right
-// content-type, amber on soft-404 (200 + text/html), red on hard 404.
 const ENDPOINTS = [
   {
     path: '/robots.txt',
@@ -33,7 +30,7 @@ const ENDPOINTS = [
     path: '/.well-known/mcp/server-card.json',
     expects: 'json',
     tier: 3,
-    purpose: 'MCP server card — tools exposed to model context',
+    purpose: 'MCP server card for tools exposed to model context',
   },
   {
     path: '/.well-known/mcp.json',
@@ -45,7 +42,7 @@ const ENDPOINTS = [
     path: '/.well-known/agent-card.json',
     expects: 'json',
     tier: 4,
-    purpose: 'A2A agent card — agent-to-agent discovery',
+    purpose: 'A2A agent card for agent-to-agent discovery',
   },
   {
     path: '/.well-known/agent-skills/index.json',
@@ -79,6 +76,39 @@ const ENDPOINTS = [
   },
 ];
 
+const STACK_LAYERS = [
+  {
+    name: 'Crawl contract',
+    status: 'Level 1',
+    text: 'robots.txt, sitemap.xml, and Link headers tell crawlers where the site map and machine endpoints live.',
+    tip: 'Cheap first move: ship robots and sitemap before touching advanced protocol files.',
+  },
+  {
+    name: 'Readable pages',
+    status: 'Level 3',
+    text: 'Markdown negotiation gives agents a clean representation without asking them to parse the visual page.',
+    tip: 'The audit sends Accept: text/markdown and expects Vary: Accept with a markdown response.',
+  },
+  {
+    name: 'Agent directory',
+    status: 'Level 4',
+    text: 'MCP, A2A, agent-skills, and api-catalog endpoints publish the actions and documentation agents can use.',
+    tip: 'Most sites can start with agent-skills and api-catalog. Full MCP is only needed when tools exist.',
+  },
+  {
+    name: 'Native controls',
+    status: 'Level 5',
+    text: 'OAuth metadata, Web Bot Auth, and browser WebMCP move the site from static discovery into governed interaction.',
+    tip: 'Do not fake commerce or payment protocols on non-commerce sites. The checker treats them as neutral.',
+  },
+];
+
+const JOURNEY = [
+  ['Before', 'Level 0', 'No robots, sitemap, markdown, or well-known discovery surface.'],
+  ['After', 'Level 5', 'Fourteen passing checks with commerce left neutral for a non-commerce demo.'],
+  ['Pattern', 'Portable', 'Same sequence maps to Next.js, Astro, SvelteKit, Remix, Vercel, Netlify, Cloudflare, and static sites.'],
+];
+
 function matchesExpectedType(contentType, expects) {
   if (!contentType) return false;
   const ct = contentType.toLowerCase();
@@ -99,7 +129,6 @@ function matchesExpectedType(contentType, expects) {
 }
 
 function levelLabel(level) {
-  // Mirrors isitagentready.com's 0-5 rubric
   const names = [
     'Not Ready',
     'Basic Web Presence',
@@ -115,6 +144,14 @@ function StatusPill({ kind, children }) {
   return <span className={`pill pill--${kind}`}>{children}</span>;
 }
 
+function InfoDot({ text }) {
+  return (
+    <span className="info-dot" aria-label={text} tabIndex={0} data-tip={text}>
+      i
+    </span>
+  );
+}
+
 export default function Home() {
   const [score, setScore] = useState({ state: 'loading' });
   const [webMcp, setWebMcp] = useState({ state: 'checking', tools: [] });
@@ -122,7 +159,6 @@ export default function Home() {
     ENDPOINTS.map((e) => ({ ...e, state: 'checking' }))
   );
 
-  // Fetch the audit score on mount
   useEffect(() => {
     let cancelled = false;
     fetch('/api/score')
@@ -167,7 +203,6 @@ export default function Home() {
     };
   }, []);
 
-  // Live-check each endpoint on the same origin
   useEffect(() => {
     let cancelled = false;
     ENDPOINTS.forEach((endpoint, idx) => {
@@ -205,29 +240,44 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Ralphthon@SG — AI-Readiness Demo</title>
+        <title>Ralphthon@SG | AI Readiness Demo</title>
         <meta
           name="description"
-          content="Live test bed for the improve-ai-readiness Claude Skill. Starts at Level 0 and climbs as the skill applies each tier."
+          content="Live test bed showing how a public website moves from Level 0 to Level 5 on agent readiness checks."
         />
       </Head>
 
       <header className="hero">
-        <div className="hero-mascot" aria-hidden>🦞</div>
+        <div className="hero-mascot" aria-hidden="true">🦞</div>
         <h1 className="title">
           RALPHTHON<span className="title-accent">@SG</span>
         </h1>
         <p className="subtitle">AI Agent Coding Hackathon</p>
         <p className="hero-blurb">
-          This page is the live test bed for the <code>improve-ai-readiness</code> Claude Skill.
-          It exposes the same machine-readable files, headers, and well-known endpoints the skill
-          applies to production websites, then reports the live audit result after each deploy.
+          A public test bed for the <code>improve-ai-readiness</code> framework. It exposes
+          crawl rules, markdown negotiation, agent directories, OAuth metadata, and browser
+          WebMCP tools, then reports the live audit result after each deploy.
         </p>
+        <nav className="hero-actions" aria-label="Demo links">
+          <a className="button button--primary" href="#live-score">
+            Live score
+          </a>
+          <a className="button" href="/details">
+            Framework details
+          </a>
+          <a
+            className="button"
+            href="https://github.com/mynk-s-rwt/improve-ai-readiness"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Source
+          </a>
+        </nav>
       </header>
 
       <main className="content">
-        {/* === SCORE CARD === */}
-        <section className="card">
+        <section className="card card--accent" id="live-score">
           <div className="card-header">
             <h2>Live AI-Readiness Score</h2>
             <a
@@ -236,12 +286,12 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              Full report ↗
+              Full report
             </a>
           </div>
 
           {score.state === 'loading' && (
-            <p className="muted">Scanning this site against isitagentready.com…</p>
+            <p className="muted">Scanning this site against isitagentready.com...</p>
           )}
 
           {score.state === 'error' && (
@@ -251,7 +301,7 @@ export default function Home() {
           {data && data.blocked && (
             <div className="blocked">
               <p className="error">
-                Audit could not reach <code>{data.url}</code> —{' '}
+                Audit could not reach <code>{data.url}</code>,{' '}
                 <strong>
                   {data.siteError.httpStatus} {data.siteError.statusText}
                 </strong>
@@ -291,8 +341,8 @@ export default function Home() {
                 {data.nextLevel && (
                   <>
                     {' '}
-                    · Next milestone: <strong>Level {data.nextLevel.target}</strong>{' '}
-                    ({data.nextLevel.name}) — {data.nextLevel.requirementCount} requirements left
+                    | Next milestone: <strong>Level {data.nextLevel.target}</strong>{' '}
+                    ({data.nextLevel.name}), {data.nextLevel.requirementCount} requirements left
                   </>
                 )}
               </p>
@@ -300,10 +350,41 @@ export default function Home() {
           )}
         </section>
 
+        <section className="journey-grid" aria-label="Before and after summary">
+          {JOURNEY.map(([label, value, text]) => (
+            <article className="mini-card" key={label}>
+              <span>{label}</span>
+              <strong>{value}</strong>
+              <p>{text}</p>
+            </article>
+          ))}
+        </section>
+
+        <section className="card">
+          <div className="card-header">
+            <h2>What This Demonstrates</h2>
+            <a className="card-link" href="/details">
+              Read the field guide
+            </a>
+          </div>
+          <div className="layer-grid">
+            {STACK_LAYERS.map((layer) => (
+              <article className="layer" key={layer.name}>
+                <div className="layer-topline">
+                  <span className="tier-chip">{layer.status}</span>
+                  <InfoDot text={layer.tip} />
+                </div>
+                <h3>{layer.name}</h3>
+                <p className="muted small">{layer.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="card">
           <div className="card-header">
             <h2>WebMCP Browser Tools</h2>
-            {webMcp.state === 'checking' && <StatusPill kind="checking">checking…</StatusPill>}
+            {webMcp.state === 'checking' && <StatusPill kind="checking">checking...</StatusPill>}
             {webMcp.state === 'live' && <StatusPill kind="live">{webMcp.tools.length} tools live</StatusPill>}
             {webMcp.state === 'missing' && <StatusPill kind="missing">missing</StatusPill>}
             {webMcp.state === 'error' && <StatusPill kind="warn">error</StatusPill>}
@@ -319,12 +400,12 @@ export default function Home() {
             </ul>
           ) : (
             <p className="muted small">
-              Tools are registered on page load through <code>navigator.modelContext.registerTool()</code>.
+              Tools are registered on page load through <code>navigator.modelContext.registerTool()</code>.{' '}
+              The fallback polyfill also supports Chromium builds that expose the test harness.
             </p>
           )}
         </section>
 
-        {/* === ENDPOINT TABLE === */}
         <section className="card">
           <div className="card-header">
             <h2>Demo Well-Known Endpoints</h2>
@@ -342,7 +423,7 @@ export default function Home() {
             <tbody>
               {endpoints.map((e) => {
                 let pill;
-                if (e.state === 'checking') pill = <StatusPill kind="checking">checking…</StatusPill>;
+                if (e.state === 'checking') pill = <StatusPill kind="checking">checking...</StatusPill>;
                 else if (e.state === 'live') pill = <StatusPill kind="live">live</StatusPill>;
                 else if (e.state === 'soft404')
                   pill = <StatusPill kind="warn">soft-404 (HTML)</StatusPill>;
@@ -367,16 +448,43 @@ export default function Home() {
           </table>
         </section>
 
-        {/* === API SAMPLE === */}
-        <section className="card">
+        <section className="split-grid">
+          <article className="card">
+            <div className="card-header">
+              <h2>Score API</h2>
+              <span className="muted small">cached 5 min, same origin</span>
+            </div>
+            <p className="muted">
+              <code>GET /api/score</code> proxies the live audit for this demo.
+              <br />
+              <code>GET /api/score?url=https://example.com</code> scans another public URL.
+            </p>
+          </article>
+
+          <article className="card">
+            <div className="card-header">
+              <h2>Use Case</h2>
+              <span className="muted small">runbook, not a checklist dump</span>
+            </div>
+            <p className="muted">
+              The framework audits first, ships only the next tier of files, waits for deployment,
+              and scans again. That keeps a plain site from receiving OAuth, A2A, MCP, and commerce
+              artifacts before they are needed.
+            </p>
+          </article>
+        </section>
+
+        <section className="card note-card">
           <div className="card-header">
-            <h2>Score API</h2>
-            <span className="muted small">cached 5min · same origin</span>
+            <h2>Beyond One Checker</h2>
+            <InfoDot text="The research folder tracks Cloudflare, SiteDex, IndexedAI, GEO scoreboards, CMS plugins, and protocol drafts." />
           </div>
           <p className="muted">
-            <code>GET /api/score</code> proxies the live audit so you can wire it into anything.
-            <br />
-            <code>GET /api/score?url=https://example.com</code> scans an arbitrary URL.
+            The same readiness surface helps with Cloudflare&apos;s audit, SiteDex-style checks,
+            agent directories, SEO crawlers, citation systems, and future AIPREF-style content
+            usage policies. <code>llms.txt</code> is included because it is cheap, but the durable
+            work is crawl policy, structured data, markdown access, signed bot policy, and tool
+            discovery.
           </p>
         </section>
       </main>
@@ -387,7 +495,7 @@ export default function Home() {
           <a href="https://isitagentready.com" target="_blank" rel="noreferrer">
             isitagentready.com
           </a>{' '}
-          · Skill source on{' '}
+          | Framework source on{' '}
           <a
             href="https://github.com/mynk-s-rwt/improve-ai-readiness"
             target="_blank"
